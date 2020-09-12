@@ -5,13 +5,19 @@ import ast
 
 app = Flask('app')
 app.config["SECRET_KEY"] = "1234"
-      
+
 @app.route('/', methods = ["GET","POST"])
 def hello_world(data = None):
-  import mystuff
-  import os
+
   form = forms.JsonStringInput()
-  
+
+  with open("data.txt", "w") as file:
+      file.write("Helloworld")
+
+#   with open("data.txt", "r") as file:
+#       file_data = file.read()
+
+
   if form.validate_on_submit():
     userinput = request.form.to_dict(flat = False)["json"][0]
     endpoint= userinput.strip().split(",")[0]
@@ -37,5 +43,6 @@ def hello_world(data = None):
                         list = list,
                         form = form,
                         data = data)
+                        # fdata = file_data)
 
 # app.run(debug = True)
