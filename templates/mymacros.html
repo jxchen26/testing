@@ -1,0 +1,31 @@
+{% macro unwrap2 (json) %}
+  
+  {% if json %}
+    {% if type(json) == list and len(json) >= 1 %}
+	      {% for item in json %}
+	        {{ unwrap2(item) }}
+	      {% endfor %}
+    {% endif %}
+
+    {% if type(json) == dict %}
+    	{% for key in json %}
+
+        	{% if type(json[key]) == str or type(json[key]) == int or type(json[key]) == bool %}
+        	<div>
+	        <p>{{ key }}  :  {{ json[key] }}</p>
+	        </div>
+	        {% elif type(json[key]) == list or type(json[key]) == dict %}
+	        
+
+        	<button class = collapsible> {{ key }} </button>   
+	        <div class = content>
+	          {{ unwrap2(json[key]) }}
+	      	</div>	
+
+	        {% endif %}
+    	{% endfor %}
+    {% endif %}
+
+  {% endif %}
+
+{% endmacro %}

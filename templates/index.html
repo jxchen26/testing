@@ -1,0 +1,39 @@
+{% from 'mymacros.html' import unwrap2 with context %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+
+    {% if title %}
+      <h2>{{title}}</h2>
+    {% else %}
+      <h2> No Title detected </h2>
+    {% endif %}
+<!--     <form autocomplete="off">
+ --><form method = "POST" action = "">
+      {{form.hidden_tag()}}
+      {{form.json(placeholder = "param here")}}
+      {{form.button}}
+    </form>
+
+    <div class = "search bar">
+      <input type = "text" id="myInput" onkeyup="Search()" placeholder="keyword">
+    </div>
+
+
+    <div>
+      <ul>
+      {{unwrap2(data)}}
+      </ul>
+    </div>  
+
+
+    <script type="text/javascript" src="{{ url_for('static', filename='button.js') }}"></script> 
+
+  </body>
+</html>
